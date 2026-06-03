@@ -1,0 +1,10 @@
+streamlit
+pandas
+numpy
+tensorflow==2.20.0
+keras==3.13.2
+protobuf>=5.28.0
+scikit-learn
+joblib
+plotly
+openpyxl

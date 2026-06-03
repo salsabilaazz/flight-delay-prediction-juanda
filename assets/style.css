@@ -1,0 +1,146 @@
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #001f4d 0%, #003b7a 100%);
+}
+
+[data-testid="stSidebar"] * {
+    color: white;
+}
+
+/* =====================================================
+   JUDUL
+===================================================== */
+
+.main-title {
+    font-size: 34px;
+    font-weight: 800;
+    color: #001f5c;
+    margin-bottom: 0px;
+}
+
+.sub-title {
+    font-size: 18px;
+    color: #001f5c;
+    margin-bottom: 20px;
+}
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section-title {
+    color: #001f5c;
+    font-weight: 800;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #001f5c;
+    text-align: center;
+}
+
+.card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #d9e2ef;
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.04);
+}
+
+/* =====================================================
+   STATUS BOX
+===================================================== */
+
+.delay-box {
+    border: 2px solid #ff4b4b;
+    color: #e60000;
+    font-weight: 800;
+    font-size: 26px;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.nondelay-box {
+    border: 2px solid #00a651;
+    color: #00a651;
+    font-weight: 800;
+    font-size: 26px;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+/* =====================================================
+   METRIC
+===================================================== */
+
+.metric-blue {
+    color: #003b9f;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.metric-red {
+    color: #e60000;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.metric-green {
+    color: #009b4e;
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.dataframe {
+    border-radius: 10px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+    text-align: center;
+    color: #001f5c;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.stButton > button {
+    background-color: #003b9f;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    height: 50px;
+    font-weight: bold;
+}
+
+.stButton > button:hover {
+    background-color: #002d73;
+    color: white;
+}
