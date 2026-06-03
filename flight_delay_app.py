@@ -127,13 +127,14 @@ def preprocess_data(df, feature_cols, scaler, weather_encoder):
         df = df.sort_values("time").reset_index(drop=True)
 
     if KOLOM_CUACA in df.columns:
-        df[KOLOM_CUACA] = (
-            df[KOLOM_CUACA]
-            .astype(str)
-            .str.strip()
-            .str.title()
-        )
+    df[KOLOM_CUACA] = (
+        df[KOLOM_CUACA]
+        .astype(str)
+        .str.strip()
+        .str.title()
+    )
 
+    if hasattr(weather_encoder, "transform"):
         weather_encoded = weather_encoder.transform(df[[KOLOM_CUACA]])
 
         weather_encoded_df = pd.DataFrame(
@@ -149,7 +150,13 @@ def preprocess_data(df, feature_cols, scaler, weather_encoder):
             ],
             axis=1
         )
-
+    else:
+        st.error(
+            "File weather_encoder.pkl tidak sesuai. "
+            "Pastikan file tersebut dibuat menggunakan sklearn OneHotEncoder."
+        )
+        st.stop()
+        
     fitur = df.drop(columns=["time"], errors="ignore")
 
     for col in feature_cols:
