@@ -419,7 +419,7 @@ if menu == "📊 Dashboard Prediksi":
 
                         with table_col:
                             st.dataframe(
-                                hasil_df.style.applymap(style_status, subset=["Status"]),
+                                hasil_df.style.map(style_status, subset=["Status"]),
                                 use_container_width=True,
                                 height=360
                             )
