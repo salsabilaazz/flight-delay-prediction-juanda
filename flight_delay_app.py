@@ -174,26 +174,34 @@ def preprocess_data(df, feature_cols, scaler, weather_encoder):
 def predict_binary(window_scaled):
     X = np.expand_dims(window_scaled, axis=0)
 
-    proba = model.predict(X, verbose=0)[0][0]
+    proba = model.predict(X, verbose=0)
+    proba = float(np.ravel(pred)[0])
+
+    if np.isnan(proba):
+        proba = 0.0
 
     label = 1 if proba >= THRESHOLD else 0
     status = "DELAY" if label == 1 else "TIDAK DELAY"
 
-    return float(proba), label, status
+    return proba, label, status
 
 # =====================================================
 # GAUGE PROBABILITAS
 # =====================================================
 def make_gauge(prob):
+    prob = float(prob)
+    prob_percent = prob * 100
+    
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
-        value=prob * 100,
+        value=prob_percent,
         number={
             "suffix": "%",
             "font": {
-                "size": 36,
+                "size": 40,
                 "color": "#e60000" if prob >= THRESHOLD else "#009b4e"
-            }
+            },
+            "valueformat": ".1f"
         },
         gauge={
             "axis": {"range": [0, 100]},
