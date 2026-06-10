@@ -198,7 +198,7 @@ def make_gauge(prob):
         number={
             "suffix": "%",
             "font": {
-                "size": 40,
+                "size": 30,
                 "color": "#e60000" if prob >= THRESHOLD else "#009b4e"
             },
             "valueformat": ".1f"
