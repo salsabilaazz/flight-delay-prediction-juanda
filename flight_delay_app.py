@@ -17,7 +17,7 @@ st.set_page_config(
 )
 
 TIMESTEP = 24
-THRESHOLD = 0.5
+THRESHOLD = 0.3
 KOLOM_CUACA = "cuaca"
 
 # =====================================================
@@ -437,7 +437,7 @@ if menu == "📊 Dashboard Prediksi":
                                 y=THRESHOLD,
                                 line_dash="dash",
                                 line_color="gray",
-                                annotation_text="Threshold 0.50"
+                                annotation_text="Threshold 0.30"
                             )
 
                             fig.update_layout(
