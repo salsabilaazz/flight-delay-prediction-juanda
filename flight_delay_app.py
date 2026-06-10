@@ -199,9 +199,9 @@ def make_gauge(prob):
             "axis": {"range": [0, 100]},
             "bar": {"color": "#001f5c"},
             "steps": [
-                {"range": [0, 50], "color": "#4cc96f"},
-                {"range": [50, 75], "color": "#ffcc33"},
-                {"range": [75, 100], "color": "#ff4b4b"}
+                {"range": [0, 30], "color": "#4cc96f"},
+                {"range": [30, 60], "color": "#ffcc33"},
+                {"range": [60, 100], "color": "#ff4b4b"}
             ],
             "threshold": {
                 "line": {"color": "black", "width": 4},
