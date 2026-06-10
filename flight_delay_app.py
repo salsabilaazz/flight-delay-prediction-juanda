@@ -174,7 +174,7 @@ def preprocess_data(df, feature_cols, scaler, weather_encoder):
 def predict_binary(window_scaled):
     X = np.expand_dims(window_scaled, axis=0)
 
-    proba = model.predict(X, verbose=0)
+    pred = model.predict(X, verbose=0)
     proba = float(np.ravel(pred)[0])
 
     if np.isnan(proba):
