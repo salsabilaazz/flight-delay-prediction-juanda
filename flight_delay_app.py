@@ -63,7 +63,7 @@ with st.sidebar:
         border-radius:12px;
         border:1px solid rgba(255,255,255,0.15);
     ">
-        <b>Model</b><br>
+        <b>Model:</b><br>
         Long Short Term Memory (LSTM)<br><br>
         <b>Prediksi</b><br>
         Klasifikasi Biner<br><br>
@@ -240,7 +240,7 @@ if menu == "📊 Dashboard Prediksi":
     )
 
     st.markdown(
-        '<div class="sub-title">Berbasis Faktor Unsur Cuaca Menggunakan LSTM</div>',
+        '<div class="sub-title">Berbasis Faktor Unsur Cuaca</div>',
         unsafe_allow_html=True
     )
 
@@ -556,13 +556,13 @@ elif menu == "ℹ️ Tentang Aplikasi":
     <tr style="background:#f8f9fa;">
         <td style="padding:10px;">Kecepatan Angin Rata-rata</td>
         <td style="padding:10px;">Kecepatan angin rata-rata</td>
-        <td style="padding:10px;">Knot (kt)</td>
+        <td style="padding:10px;">Km/jam</td>
     </tr>
 
     <tr>
         <td style="padding:10px;">Kecepatan Angin Maksimum</td>
         <td style="padding:10px;">Kecepatan angin maksimum</td>
-        <td style="padding:10px;">Knot (kt)</td>
+        <td style="padding:10px;">Km/jam</td>
     </tr>
 
     <tr style="background:#f8f9fa;">
@@ -592,7 +592,7 @@ elif menu == "ℹ️ Tentang Aplikasi":
     <tr style="background:#f8f9fa;">
         <td style="padding:10px;">Jarak Pandang</td>
         <td style="padding:10px;">Visibility horizontal</td>
-        <td style="padding:10px;">Meter (m)</td>
+        <td style="padding:10px;">Kilometer (km)</td>
     </tr>
 
     <tr>
