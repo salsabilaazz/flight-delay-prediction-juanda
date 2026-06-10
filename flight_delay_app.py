@@ -76,8 +76,8 @@ with st.sidebar:
 # =====================================================
 # LOAD ARTIFACTS
 # =====================================================
-MODEL_PATH = "model/model_skenario A.keras"
-SCALER_PATH = "model/scaler.pkl"
+MODEL_PATH = "model/model_skenario B.keras"
+SCALER_PATH = "model/scaler_80.pkl"
 FEATURE_COLS_PATH = "model/feature_columns.pkl"
 WEATHER_ENCODER_PATH = "model/weather_encoder.pkl"
 
@@ -247,7 +247,7 @@ if menu == "📊 Dashboard Prediksi":
     if not model_ready:
         st.error(
             "Model belum berhasil dimuat. Pastikan file berikut tersedia: "
-            "`model_skenario A.keras`, `scaler.pkl`, `feature_columns.pkl`, dan `weather_encoder.pkl` "
+            "`model_skenario B.keras`, `scaler_80.pkl`, `feature_columns.pkl`, dan `weather_encoder.pkl` "
             "di dalam folder `model/`."
         )
         st.code(error_msg)
