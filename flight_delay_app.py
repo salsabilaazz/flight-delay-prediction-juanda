@@ -39,7 +39,7 @@ with st.sidebar:
     st.markdown("""
     <div style="text-align:center; padding-top:20px;">
         <div style="font-size:60px;">✈️</div>
-        <h3>Prediksi Delay Penerbangan<br>di Bandara Udara Juanda</h3>
+        <h3>Prediksi Cuaca Buruk untuk Operasional Penerbangan<br>di Bandara Udara Juanda</h3>
     </div>
     """, unsafe_allow_html=True)
 
