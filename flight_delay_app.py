@@ -76,8 +76,8 @@ with st.sidebar:
 # =====================================================
 # LOAD ARTIFACTS
 # =====================================================
-MODEL_PATH = "model/model_skenario B.keras"
-SCALER_PATH = "model/scaler_80.pkl"
+MODEL_PATH = "model/model_skenario A_2.keras"
+SCALER_PATH = "model/scaler_70 (1).pkl"
 FEATURE_COLS_PATH = "model/feature_columns.pkl"
 WEATHER_ENCODER_PATH = "model/weather_encoder.pkl"
 
@@ -181,7 +181,7 @@ def predict_binary(window_scaled):
         proba = 0.0
 
     label = 1 if proba >= THRESHOLD else 0
-    status = "DELAY" if label == 1 else "TIDAK DELAY"
+    status = "Ada Cuaca Buruk" if label == 1 else "Tidak Ada Cuaca Buruk"
 
     return proba, label, status
 
@@ -231,9 +231,9 @@ def make_gauge(prob):
 # STYLE STATUS TABEL
 # =====================================================
 def style_status(val):
-    if val == "DELAY":
+    if val == "Ada Cuaca Buruk":
         return "color: red; font-weight: bold;"
-    if val == "TIDAK DELAY":
+    if val == "Tidak Ada Cuaca Buruk":
         return "color: green; font-weight: bold;"
     return ""
 
@@ -243,7 +243,7 @@ def style_status(val):
 if menu == "📊 Dashboard Prediksi":
 
     st.markdown(
-        '<div class="main-title">PREDIKSI DELAY PENERBANGAN DI BANDARA UDARA JUANDA</div>',
+        '<div class="main-title">PREDIKSI CUACA BURUK UNTUK OPERASIONAL PENERBANGAN DI BANDARA UDARA JUANDA</div>',
         unsafe_allow_html=True
     )
 
@@ -255,7 +255,7 @@ if menu == "📊 Dashboard Prediksi":
     if not model_ready:
         st.error(
             "Model belum berhasil dimuat. Pastikan file berikut tersedia: "
-            "`model_skenario B.keras`, `scaler_80.pkl`, `feature_columns.pkl`, dan `weather_encoder.pkl` "
+            "`model_skenario A_2.keras`, `scaler_70 (1).pkl`, `feature_columns.pkl`, dan `weather_encoder.pkl` "
             "di dalam folder `model/`."
         )
         st.code(error_msg)
@@ -264,7 +264,7 @@ if menu == "📊 Dashboard Prediksi":
 
     with col_up1:
         st.markdown(
-            '<div class="section-title">1. Upload Data Historis 12 Jam Terakhir</div>',
+            '<div class="section-title">1. Upload Data Historis 12 Jam Periode Sebelumnya</div>',
             unsafe_allow_html=True
         )
 
@@ -276,7 +276,7 @@ if menu == "📊 Dashboard Prediksi":
 
     with col_up2:
         st.markdown(
-            '<div class="section-title">2. Upload Data Forecast Cuaca Seminggu</div>',
+            '<div class="section-title">2. Upload Data Prakiraan Cuaca Seminggu</div>',
             unsafe_allow_html=True
         )
 
@@ -296,7 +296,7 @@ if menu == "📊 Dashboard Prediksi":
 
     if uploaded_forecast is not None:
         forecast_df = read_file(uploaded_forecast)
-        st.success(f"Data forecast berhasil diupload: {len(forecast_df)} baris")
+        st.success(f"Data prakiraan berhasil diupload: {len(forecast_df)} baris")
         st.dataframe(forecast_df.head(), use_container_width=True)
 
     run_pred = st.button("🔍 Jalankan Prediksi", use_container_width=True)
@@ -346,17 +346,17 @@ if menu == "📊 Dashboard Prediksi":
                 with c1:
                     st.markdown('<div class="card-title">STATUS PREDIKSI</div>', unsafe_allow_html=True)
 
-                    if status == "DELAY":
-                        st.markdown('<div class="delay-box">DELAY</div>', unsafe_allow_html=True)
+                    if status == "Ada Cuaca Buruk":
+                        st.markdown('<div class="delay-box">Ada Cuaca Buruk</div>', unsafe_allow_html=True)
                         st.markdown('<div class="metric-red">✈️</div>', unsafe_allow_html=True)
                         st.markdown('<div class="metric-blue">(1)</div>', unsafe_allow_html=True)
                     else:
-                        st.markdown('<div class="nondelay-box">TIDAK DELAY</div>', unsafe_allow_html=True)
+                        st.markdown('<div class="nondelay-box">Tidak Ada Cuaca Buruk</div>', unsafe_allow_html=True)
                         st.markdown('<div class="metric-green">✅</div>', unsafe_allow_html=True)
                         st.markdown('<div class="metric-blue">(0)</div>', unsafe_allow_html=True)
 
                 with c2:
-                    st.markdown('<div class="card-title">PROBABILITAS DELAY</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="card-title">PROBABILITAS CUACA BURUK</div>', unsafe_allow_html=True)
                     st.plotly_chart(make_gauge(proba), use_container_width=True)
                     st.markdown(
                         f"<div style='text-align:center;'>Threshold: {THRESHOLD:.2f}</div>",
@@ -408,7 +408,7 @@ if menu == "📊 Dashboard Prediksi":
                         hasil_pred.append({
                             "No": i + 1,
                             "Waktu (UTC)": waktu_i,
-                            "Prob Delay": round(proba_i, 3),
+                            "Prob Cuaca Buruk": round(proba_i, 3),
                             "Prediksi": label_i,
                             "Status": status_i
                         })
@@ -419,7 +419,7 @@ if menu == "📊 Dashboard Prediksi":
 
                     with right:
                         st.markdown(
-                            '<div class="section-title">PREDIKSI DELAY SEMINGGU KE DEPAN</div>',
+                            '<div class="section-title">PREDIKSI CUACA BURUK SEMINGGU KE DEPAN</div>',
                             unsafe_allow_html=True
                         )
 
@@ -436,9 +436,9 @@ if menu == "📊 Dashboard Prediksi":
                             fig = px.line(
                                 hasil_df,
                                 x="Waktu (UTC)",
-                                y="Prob Delay",
+                                y="Prob Cuaca Buruk",
                                 markers=True,
-                                title="Grafik Probabilitas Delay"
+                                title="Grafik Probabilitas Cuaca Buruk"
                             )
 
                             fig.add_hline(
@@ -462,7 +462,7 @@ if menu == "📊 Dashboard Prediksi":
                             st.download_button(
                                 "⬇️ Download Hasil Prediksi CSV",
                                 data=csv,
-                                file_name="hasil_prediksi_delay_juanda.csv",
+                                file_name="hasil_prediksi_cuaca_buruk_juanda.csv",
                                 mime="text/csv",
                                 use_container_width=True
                             )
@@ -483,20 +483,20 @@ if menu == "📊 Dashboard Prediksi":
                         st.metric("Total Timestep", total_timestep)
 
                     with r2:
-                        st.metric("Total Delay", total_delay)
+                        st.metric("Total Cuaca Buruk", total_delay)
 
                     with r3:
-                        st.metric("Total Tidak Delay", total_tidak_delay)
+                        st.metric("Total Tidak Ada Cuaca Buruk", total_tidak_delay)
 
                     with r4:
-                        st.metric("Persentase Delay", f"{persen_delay:.1f}%")
+                        st.metric("Persentase Cuaca Buruk", f"{persen_delay:.1f}%")
                         st.progress(persen_delay / 100)
 
             else:
                 st.info("Upload data forecast jika ingin menampilkan prediksi seminggu ke depan.")
 
     st.markdown(
-        '<div class="footer">© 2026 Prediksi Delay Penerbangan Juanda</div>',
+        '<div class="footer">© 2026 Prediksi Cuaca Buruk untuk Operasional Penerbangan di Bandara Juanda</div>',
         unsafe_allow_html=True
     )
 
@@ -511,19 +511,19 @@ elif menu == "ℹ️ Tentang Aplikasi":
     )
 
     st.markdown("""
-    *Web application* ini merupakan sistem prediksi *delay* penerbangan yang dikembangkan untuk membantu mengidentifikasi 
-    potensi keterlambatan operasional penerbangan di Bandara Udara Juanda berdasarkan kondisi cuaca. Sistem memanfaatkan 
-    metode ***Long Short-Term Memory (LSTM)***, yaitu salah satu algoritma *deep learning* yang dirancang untuk mempelajari 
-    pola data deret waktu (*time series*). Model memanfaatkan data unsur cuaca yang diamati di Bandara Udara Juanda untuk 
-    menghasilkan prediksi status *delay* pada waktu berikutnya serta proyeksi potensi *delay* pada periode mendatang 
+    *Web application* ini merupakan sistem prediksi cuaca buruk untuk operasional penerbangan yang dikembangkan untuk membantu  
+    mengidentifikasi potensi keterlambatan operasional penerbangan di Bandara Udara Juanda berdasarkan kondisi cuaca. Sistem  
+    memanfaatkanmetode ***Long Short-Term Memory (LSTM)***, yaitu salah satu algoritma *deep learning* yang dirancang untuk  
+    mempelajari pola data deret waktu (*time series*). Model memanfaatkan data unsur cuaca yang diamati di Bandara Udara Juanda untuk 
+    menghasilkan prediksi kejadian cuaca buruk pada waktu berikutnya serta proyeksi potensi cuaca buruk pada periode mendatang 
     berdasarkan data prakiraan cuaca.
 
     **Tujuan Aplikasi**
                 
     Aplikasi ini bertujuan untuk:
-    - Memprediksi potensi *delay* penerbangan berdasarkan kondisi cuaca.
+    - Memprediksi potensi cuaca buruk untuk penerbangan berdasarkan kondisi cuaca.
     - Membantu pengambilan keputusan operasional terkait penerbangan.
-    - Menyediakan informasi risiko *delay* secara cepat dan mudah dipahami.
+    - Menyediakan informasi risiko cuaca buruk secara cepat dan mudah dipahami.
     - Menampilkan prediksi jangka pendek berdasarkan data cuaca historis dan prakiraan cuaca.
     """)
 
@@ -539,7 +539,7 @@ elif menu == "ℹ️ Tentang Aplikasi":
 
     **2. Data *forecast* cuaca seminggu**
 
-    Data ini digunakan untuk menghasilkan prediksi *delay* pada periode ke depan.    
+    Data ini digunakan untuk menghasilkan prediksi cuaca buruk pada periode ke depan.    
     """)
 
     st.markdown("### Variabel *Input* yang Digunakan")
@@ -638,19 +638,18 @@ elif menu == "ℹ️ Tentang Aplikasi":
     st.markdown("""
     **Aplikasi menghasilkan:**
     - Prediksi Utama (+1 *Timestep*)
-    - Prediksi kondisi *delay* untuk periode berikutnya.
+    - Prediksi kondisi cuaca buruk untuk periode berikutnya.
     
     **Keluaran berupa:**
-    - Status *Delay*  
-    - Status Tidak *Delay*
-    - Probabilitas *Delay* (%)
+    - Kejadian Cuaca Buruk 
+    - Probabilitas Cuaca Buruk (%)
     - Prediksi Periode Mendatang
-    - Prediksi delay berdasarkan data *forecast* cuaca yang diunggah pengguna.
+    - Prediksi cuaca buruk berdasarkan data prakiraan cuaca yang diunggah pengguna.
 
     **Informasi yang ditampilkan:**
-    - Tabel prediksi *delay*
-    - Grafik probabilitas *delay*
-    - Ringkasan jumlah *delay* dan tidak *delay*
+    - Tabel prediksi cuaca buruk
+    - Grafik probabilitas cuaca buruk
+    - Ringkasan jumlah cuaca buruk dan tidak cuaca buruk
     - File hasil prediksi yang dapat diunduh
     """)
     st.markdown("### Interpretasi Hasil Prediksi")
@@ -667,11 +666,11 @@ elif menu == "ℹ️ Tentang Aplikasi":
     </tr>
     <tr>
         <td style="padding:10px; border:1px solid #ddd;">0</td>
-        <td style="padding:10px; border:1px solid #ddd;">Tidak <em>Delay</em></td>
+        <td style="padding:10px; border:1px solid #ddd;">Tidak <em>Cuaca Buruk</em></td>
     </tr>
     <tr>
         <td style="padding:10px; border:1px solid #ddd;">1</td>
-        <td style="padding:10px; border:1px solid #ddd;"><em>Delay</em></td>
+        <td style="padding:10px; border:1px solid #ddd;"><em>Cuaca Buru</em></td>
     </tr>
     </table>
     """, unsafe_allow_html=True)
