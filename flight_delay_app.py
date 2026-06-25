@@ -11,7 +11,7 @@ from tensorflow.keras.models import load_model
 # KONFIGURASI
 # =====================================================
 st.set_page_config(
-    page_title="Prediksi Delay Penerbangan di Bandara Udara Juanda",
+    page_title="Prediksi Cuaca Buruk untuk Operasional Penerbangan di Bandara Udara Juanda",
     page_icon="✈️",
     layout="wide"
 )
